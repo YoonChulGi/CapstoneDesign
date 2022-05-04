@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Talent - Bank</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/shop-item.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+  
+  	<%if(!req.user) { console.log('로그인좀');%>
+  	<script>alert('로그인 후 이용 가능한 서비스입니다.');history.go(-1);</script>
+  	<%}%>
+	<%if(req.query.add == 'ok') {%>
+		<script>
+			alert('장바구니에 추가되었습니다.');
+		</script>		
+	<%}%>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">Talent Bank</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-3">
+        	<%
+        		let category = result._doc.category;
+        		let shopName = '';
+        		let category1 = '';
+        		let category2 = '';
+        		let category3 = '';
+        		switch(category){
+        			case 'web':
+        			case 'Front-end':
+        			case 'Back-end':
+        			case 'Framework':
+						shopName = '웹_'+category;
+						category1 = 'Front-end'
+						category2 = 'Back-end'
+						category3 = 'Framework'
+						break;
+					case 'programming':
+					case 'C':
+					case 'Java': 
+					case 'Python':   
+						shopName = '프로그래밍_'+category;
+						category1 = 'C'
+						category2 = 'Java'
+						category3 = 'Python'
+						break;
+					case 'logo':
+					case 'Product':
+					case 'Company':
+					case 'Application':
+						showName = '로고_'+category;
+					    category1 = 'Product';
+					    category2 = 'Company';
+					    category3 = 'Application';
+					    break;
+        		}
+        	%>
+        	<%
+        		if(shopName == '프로그래밍_C') {
+        			shopName = '프로그래밍_C/C++';
+        		}
+        	%>
+          <h1 class="my-4"><%=shopName%></h1>
+          <div class="list-group">
+          	<% let str = category1; if(category1 == 'C') str = 'C/C++';%>
+            <a id="category1" href="/category?c=<%=category1%>" class="list-group-item"><%=str%></a>
+            <a id="category2" href="/category?c=<%=category2%>" class="list-group-item"><%=category2%></a>
+            <a id="category3" href="/category?c=<%=category3%>" class="list-group-item"><%=category3%></a>
+            <!-- active class를 추가하는 프로그래밍 해야함 -->
+            <input type="hidden" value=""/>
+            <%if(result._doc.category=='Front-end'||result._doc.category=='C' || result._doc.category=='Product') {%>
+          		<script>
+          			document.getElementById('category1').classList.add('active');
+          		</script>
+          	<%} else if(result._doc.category=='Back-end' || result._doc.category=='Java' || result._doc.category=='Company') {%>
+          		<script>
+          			document.getElementById('category2').classList.add('active');
+          		</script>
+          	<%} else if(result._doc.category=='Framework' || result._doc.category=='Python' || result._doc.category=='Application'){%>
+          		<script>
+          			document.getElementById('category3').classList.add('active');
+          		</script>
+          	<%}%>
+          </div>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+          <div class="card mt-4">
+            <img class="card-img-top img-fluid" src="<%=result._doc.picture%>" alt="">
+            <div class="card-body">
+              	<h3 class="card-title"><%=result._doc.title%></h3> <h5>조회수 <%=result._doc.count%></h5>
+              <h4><%=result._doc.price%>원</h4>
+              <p class="card-text"><%=result._doc.discribe%></p>
+              <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+              4.0 stars
+              <hr>
+              <div class="row">
+              	&nbsp;&nbsp;
+              	
+              	<%	let user = req.user.userID || req.user[0].userID;%>
+              	
+              	<%if(user != result._doc.author_id){%>
+              	<a href="/buy?id=<%=result._doc._id%>" class="btn btn-success col-xs-5">구매하기</a>&nbsp;&nbsp;
+            	<a href="/addBasket?article_id=<%=result._doc._id%>" class="btn btn-success col-xs-5">장바구니에 담기</a>&nbsp;&nbsp;
+            	<%}%>
+            	<a href="#" class="btn btn-success col-xs-5" onclick="portfolio()">판매자 정보</a>&nbsp;&nbsp;
+            	<script>
+            		function portfolio(){
+            			open("/portfolio?id=<%=result._doc.author_id%>", "판매자 상세",  "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=791, height=900");
+            		}
+            	</script>
+            	
+            		<%if(user == result._doc.author_id){%>
+            			<a href="/modify?id=<%=result._doc._id%>" class="btn btn-success col-xs-5">게시글 수정</a>&nbsp;&nbsp;
+            			<div class="btn btn-success col-xs-5" onclick="yesorno()">게시글 삭제</div>&nbsp;&nbsp;
+            			<script>
+            				function yesorno(){
+            					if(confirm("삭제하시겠습니까")){
+            						window.location.href="/deletePro?id=<%=req.query.id%>";
+            					} else{
+            						return;
+            					}
+            				}
+            			</script>
+            		<%}%>
+              </div>
+            </div>
+            	
+          </div>
+          <!-- /.card -->
+
+          <div class="card card-outline-secondary my-4" style="display:none;">
+            <div class="card-header">
+              	구매 후기
+            </div>
+            <div class="card-body">
+              <p>Data1</p>
+              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+              <hr>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+              <hr>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+              <hr>
+              <a href="#" class="btn btn-success">리뷰 작성하기</a>
+            </div>
+          </div>
+          <!-- /.card -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

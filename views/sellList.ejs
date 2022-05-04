@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<% include ./navbar %>
+<body>
+	<style type="text/css">
+	.container {
+		border-color: #000000;
+		border-style: solid;
+	}
+
+	.btn-main {
+		background-color: #000000;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #000000;
+	}
+	.btn-main:hover,
+	.btn-main:focus {
+		color: #fff;
+		background-color: #000000;
+		border-color: #000000;
+	}
+	
+	.hello { size: 
+		     height: auto; 
+			 font-size: 30px;  }
+	th,td{
+		text-align:center;
+	}
+	
+	img:hover{
+		cursor:pointer;
+	}
+	</style>
+	
+	<div class="container" style="text-align: center;">
+	<%console.dir(articleInfo);%>
+	<%
+		console.log(buyersID); 
+		let buyers = buyersID.split('#');
+		let Buyers = new Array();
+		for(let i=0;i<buyers.length-1;i++){
+			Buyers[i] = buyers[i];
+		}
+	%>
+		<h2>판매중인 물품</h2>
+		<br>
+		<br>
+		<br>
+		<br>
+		<table class="table">
+		<thead>
+		<tr>
+			<th scope="col">사진</th>
+			<th scope="col">카테고리</th>
+			<th scope="col">제목</th>
+			<th scope="col">구매자 ID</th>
+			<th scope="col">가격</th>
+			<th scope="col">1:1 문의</th>
+			<th scope="col">인계 확인</th>
+		</tr>
+		</thead>
+		<tbody>
+			<%for(let i=0;i<articleInfo.length;i++){let category = articleInfo[i]._doc.category;if(category=="C")category="C/C++";%>
+			<script>
+				function chatBox(){
+					open("/chatBox?id=<%=articleInfo[i]._doc._id%>&buyer_id=<%=Buyers[i]%>&prop=sell", "1:1 문의",  "toolbar=no, location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=791, height=900");
+				}	
+			</script>
+			<tr>
+				<td><img src="<%=articleInfo[i]._doc.picture%>" width="50px" height="50px" onclick="location.href='/item?id=<%=articleInfo[i]._doc._id%>'"></td>
+				<td><%=category%></td>
+				<td><a href="/item?id=<%=articleInfo[i]._doc._id%>"><%=articleInfo[i]._doc.title%></a></td>
+				<td><%=Buyers[i]%></td>
+				<td><%=articleInfo[i]._doc.price%></td>
+				<td><input type="button" class="btn btn-success" value="1:1문의 답변" onclick="chatBox()"/></td>
+				
+				<td><input type="button" class="btn btn-success" value="인계 확인" onclick="alert('여기를 구현해라');"/></td>
+			</tr>
+			<%}%>
+			
+			
+		</tbody>
+		</table>
+		
+		
+		<br>
+		<br>
+		<br>
+		<br><br>
+		<br>
+		<br>
+		<br><br>
+		<br>
+		<br>
+		<br>
+		<hr>
+	</div>
+		<br/>
+		<br>
+		<br>
+		<br>
+		<br>
+<footer style="background-color: #000000; color: #ffffff">
+	<div class="container">
+		<br>
+			<div class="row">
+				<div class="col-sm-2"></div>		
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4"></div>			
+				<div class="col-sm-2" style="text-align: center;">
+					<% let d = new Date(); %>
+					<h5>Copyright &copy; <%=d.getFullYear()%></h5><h5>201301277 윤철기</h5><br/><br/>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	
+</body>
+</html>

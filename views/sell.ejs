@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Talent - Bank</title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/codingBooster.css">
+</head>
+<%if(!req.user){%>
+	<script>
+		alert('로그인 한 유저만 이용할 수 있습니다.');
+		window.location.href = '/login';
+	</script>
+<%}%>
+<body>
+<form action="/write" method="get">
+	<table>
+		<tr>
+			<th class="form-control">대분류</th><td>
+				<select name="category" class="form-control">
+		  			<option value="computer">컴퓨터</option>
+		  			<option value="design">디자인</option>
+		  			<option value="translate">번역</option>
+		  			<option value="document">문서작성</option>
+		  			<option value="marketing">마케팅</option>
+		  			<option value="media">광고/미디어</option>
+		  			<option value="lecture">재능강의</option>
+				</select></td>
+				<td><input type="submit" value="글쓰기" class="form-control"/></td>
+		</tr>
+		
+		
+	
+	</table>
+</form>
+</body>
+</html>

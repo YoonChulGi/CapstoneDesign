@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width", initial-scale="1">
+	<title>Talent - Bank</title>
+	
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/codingBooster.css">
+</head>
+<% include ./navbar %>
+<body>
+
+	<style type="text/css">
+	.container {
+		border-color: #000000;
+		border-style: solid;
+	}
+
+	.btn-main {
+		background-color: #000000;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #000000;
+	}
+	.btn-main:hover,
+	.btn-main:focus {
+		color: #fff;
+		background-color: #333333;
+		border-color: #333333;
+	}
+	footer{
+			bottom:0;
+			width:100%;
+		}
+	
+	
+	
+
+	</style>
+	<%if(!(userInfo && authorInfo && articleInfo)){%>
+	<script>
+		alert("비 정상적인 요청입니다.");
+		history.go(-1);
+	</script>
+	<%}%>
+	
+	<div class="container" style="text-align: center;height:650px;">
+		
+		<div style="height:120px"></div>
+		<h2>재능 구매(<%=articleInfo._doc.title%>)</h2>
+		<div class="form-group" >
+			
+		</div>
+		<hr/>
+		
+		
+		<div class="form-group" >
+			<div class="row"> 
+				<div class="col-sm-12 col-lg-12 col-xs-12"><input type="button" name="" tabindex="4" class="form-control btn btn-main" value="상품 상세" onclick="location.href='/item?id=<%=articleInfo._doc._id%>'"></div>
+			</div>
+			<br />
+			<div class="row"> 
+				<div class="col-sm-12 col-lg-12 col-xs-12"><input type="button" name="" tabindex="4" class="form-control btn btn-main" value="1:1 문의" onclick="chatBox()"></div>
+			</div>
+			<script>
+				function chatBox(){
+					open("/chatBox?id=<%=articleInfo._doc._id%>&author_id=<%=authorInfo._doc.userID%>&prop=buy", "1:1 문의",  "toolbar=no, location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=791, height=900");
+				}
+			</script>
+			<br />
+			<div class="row">
+				<div class="col-sm-12 col-lg-12 col-xs-12"><input type="button" name="" tabindex="4" class="form-control btn btn-main" value="인수 확인" onclick="receiveConfirm()"></div>
+			</div>
+			<script>
+				function receiveConfirm(){
+					if(confirm("상품을 인수 받으셨습니까?")){
+						alert('ㅇㅇ');
+					}else{
+						alert('ㄴㄴ');
+					}
+				}
+			</script>
+		</div>
+		<hr>
+	</div>
+		<br/>
+
+<footer style="background-color: #000000; color: #ffffff">
+
+	<div class="container">
+		<br>
+			<div class="row">
+				<div class="col-sm-2"></div>		
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4"></div>			
+				<div class="col-sm-2" style="text-align: center;">
+					<% let d = new Date(); %>
+					<h5>Copyright &copy; <%=d.getFullYear()%></h5><h5>201301277 윤철기</h5><br/><br/>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width", initial-scale="1">
+	<title>Talent - Bank</title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/codingBooster.css">
+</head>
+<body>
+	<style type="text/css">
+	@media (min-width: 768px) {
+		.omb_row-sm-offset-3 div:first-child[class*="col-"] {
+			margin-left: 25%;
+		}
+	}
+	
+
+		
+	.panel-login {
+		border-color: #ccc;
+		-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+		-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+		box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	}
+	.panel-login>.panel-heading {
+		color: #00415d;
+		background-color: #fff;
+		border-color: #fff;
+		text-align:center;
+	}
+	.panel-login>.panel-heading a{
+		text-decoration: none;
+		color: #666;
+		font-weight: bold;
+		font-size: 15px;
+		-webkit-transition: all 0.1s linear;
+		-moz-transition: all 0.1s linear;
+		transition: all 0.1s linear;
+	}
+	.panel-login>.panel-heading a.active{
+		color: #029f5b;
+		font-size: 18px;
+	}
+	.panel-login>.panel-heading hr{
+		margin-top: 10px;
+		margin-bottom: 0px;
+		clear: both;
+		border: 0;
+		height: 1px;
+		background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+		background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+		background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+		background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	}
+	.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+		height: 45px;
+		border: 1px solid #ddd;
+		font-size: 16px;
+		-webkit-transition: all 0.1s linear;
+		-moz-transition: all 0.1s linear;
+		transition: all 0.1s linear;
+	}
+	.panel-login input:hover,
+	.panel-login input:focus {
+		outline:none;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		border-color: #ccc;
+	}
+	.btn-login {
+		background-color: #59B2E0;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #59B2E6;
+	}
+	.btn-login:hover,
+	.btn-login:focus {
+		color: #fff;
+		background-color: #53A3CD;
+		border-color: #53A3CD;
+	}
+	
+	.btn-login2 {
+		background-color: #0D0899;  
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #0D0899;
+	}
+	.btn-login2:hover,
+	.btn-login2:focus {
+		color: #fff;
+		background-color: #0D0899;
+		border-color: #0D0899;
+	}
+
+	.btn-login3 {
+		background-color: #5CD428;  
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #5CD428;
+	}
+	.btn-login3:hover,
+	.btn-login3:focus {
+		color: #fff;
+		background-color: #5CD428;
+		border-color: #5CD428;
+	}
+
+	.btn-login4 {
+		background-color: #FFFF00;  
+		outline: none;
+		color: #000000;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #FFFF00;
+	}
+	.btn-login4:hover,
+	.btn-login4:focus {
+		color: #000000;
+		background-color: #FFFF00;
+		border-color: #FFFF00;
+	}
+
+
+	.forgot-password {
+		text-decoration: underline;
+		color: #888;
+	}
+	.forgot-password:hover,
+	.forgot-password:focus {
+		text-decoration: underline;
+		color: #666;
+	}
+
+	.btn-register {
+		background-color: #1CB94E;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #1CB94A;
+	}
+	.btn-register:hover,
+	.btn-register:focus {
+		color: #fff;
+		background-color: #1CA347;
+		border-color: #1CA347;
+	}
+	.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+	</style>
+<% include ./navbar %>
+<div class="container">
+    	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-body" >
+						<div class="row">
+							<div class="col-ls-12">
+								<form id="register-form" action="/writePro" method="post" role="form" enctype="multipart/form-data">
+									<div class="form-group">
+										<div class="row">
+											<div class="row">
+												<div class="form-group">
+													<div class="col-xs-1"></div>
+													<div class="col-xs-2"><h4>카테고리</h4></div>
+													<div class="col-xs-4">
+														<select class="form-control" name="category1" id="category1" onchange="categoryChange()">
+															<% if(req.query.category == "computer"){%>
+															<option id="item1" value="web">웹</option>
+															<option id="item2"  value="server">서버</option> 
+															<option id="item3"  value="programming">프로그래밍</option> 
+															<option id="item4"  value="wordprocess">워드프로세스</option> 
+															<option id="item5"  value="etc">기타</option> 
+															<%}else if(req.query.category == "design"){%>
+															<option id="item1" value="logo">로고</option>
+															<option id="item2"  value="webtoon">웹툰</option> 
+															<option id="item3"  value="Photoshop">포토샵</option> 
+															<option id="item4"  value="etc">기타</option>
+															<%}%>
+														</select>
+													</div>
+													<script>
+														$(function(){
+															if($("#category1").val() == "logo") {
+																$('#subcategory1').val('Product');
+																document.getElementById('subcategory1').innerText = 'Product';
+																$('#subcategory2').val('Company');
+																document.getElementById('subcategory2').innerText = 'Company';
+																$('#subcategory3').val('Application');
+																document.getElementById('subcategory3').innerText = 'Application';
+															}
+															
+														});
+													
+													</script>
+												
+													<div class="col-xs-4">
+														<select class="form-control" name="category2" id="subcategory">
+															<option id="subcategory1" value="Front-end">Front-end</option>
+															<option id="subcategory2" value="Back-end">Back-end</option> 
+															<option id="subcategory3" value="Framework">Framework</option> 
+														</select>
+													</div>
+													<div class="col-xs-1"></div>
+													<script>
+														function categoryChange() {
+															if(document.getElementById('category1').value == 'web'){
+																document.getElementById('subcategory1').value = 'Front-end';
+																document.getElementById('subcategory1').innerText = 'Front-end';
+																document.getElementById('subcategory2').value = 'Back-end';
+																document.getElementById('subcategory2').innerText = 'Back-end';
+																document.getElementById('subcategory3').value = 'Framework';
+																document.getElementById('subcategory3').innerText = 'Framework';
+															} else if(document.getElementById('category1').value == 'programming') {
+																document.getElementById('subcategory1').value = 'C';
+																document.getElementById('subcategory1').innerText = 'C/C++';
+																document.getElementById('subcategory2').value = 'Java';
+																document.getElementById('subcategory2').innerText = 'Java';
+																document.getElementById('subcategory3').value = 'Python';
+																document.getElementById('subcategory3').innerText = 'Python';
+															} else if(document.getElementById('category1').value=="logo") {
+																document.getElementById('subcategory1').value = 'Product'; // 상품 로고
+																document.getElementById('subcategory1').innerText = 'Product';
+																document.getElementById('subcategory2').value = 'Company'; // 회사 로고
+																document.getElementById('subcategory2').innerText = 'Company';
+																document.getElementById('subcategory3').value = 'Application'; // 어플 로고
+																document.getElementById('subcategory3').innerText = 'Application';
+															}
+														}
+														
+													</script>
+												</div> <!-- form-group -->
+											</div> <!-- row -->
+											<div class="row">
+												<div class="form-group">
+													<div class="col-xs-1"></div>
+													<div class="col-xs-2"><h4>제목</h4></div>
+													<div class="col-xs-8"><input type="text" name="title" id="title" tabindex="1" class="form-control reset" placeholder="제목" value=""></div>
+													<div class="col-xs-1"></div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="form-group">
+													<div class="col-xs-1"></div>
+ 													<div class="col-xs-2"><h4>첨부사진</h4></div>
+  														<div class="col-xs-2">
+   															<label class="input-group-btn">
+    																<span class="btn btn-default btn-file">Browse <input accept=".gif, .jpg, .png" type="file" name="attach_file" data-display-target="attachFile" /></span>
+   															</label>
+   															</div>
+   														<div class="col-xs-6">
+   															<input type="text" class="form-control" readonly id="attachFile" placeholder="지원되는 파일 양식: jpg, png, gif">
+   														</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="form-group">
+													<div class="col-xs-1"></div>
+													<div class="col-xs-2"><h4>가격</h4></div>
+													<div class="col-xs-2"><input type="text" name="price" id="price" tabindex="1" class="form-control reset" placeholder="가격(원)" value=""></div>
+													<div class="col-xs-4" style="padding:1px"><h4>원</h4></div>
+													<div class="col-xs-1"></div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="form-group">
+													<div class="col-xs-1"></div>
+													<div class="col-xs-2"><h4>내용</h4></div>
+													<div class="col-xs-8"><textarea name="discribe" id="discribe" tabindex="1" class="form-control" placeholder="내용" rows="20" style="resize: none;"></textarea></div>
+													<div class="col-xs-1"></div>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="작성 완료" onclick="return check()">
+												<script>
+													function check(){
+														if(document.getElementById("title").value==""){
+															alert('제목을 입력하세요');
+															return false;
+														}
+														if(document.getElementById("attachFile").value==""){
+															alert('첨부사진을 등록하세요');
+															return false;
+														}
+														if(document.getElementById("price").value==""){
+															alert('가격을 입력하세요');
+															return false;
+														}
+														if(document.getElementById("discribe").value==""){
+															alert('본문을 입력하세요');
+															return false;
+														}
+														return true;
+														
+														
+													}
+													
+												</script>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<footer style="background-color: #000000; color: #ffffff">
+	<div class="container">
+		<br>
+			<div class="row">
+				<div class="col-sm-2"></div>		
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4"></div>			
+				<div class="col-sm-2" style="text-align: center;">
+					<% let d = new Date(); %>
+					<h5>Copyright &copy; <%=d.getFullYear()%></h5><h5>201301277 윤철기</h5><br/><br/>
+				</div>
+			</div>
+		</div> 
+	</footer>
+	<div class="row">
+		<div class="modal" id="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						코딩 부스터의 특징
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" style="text-align: center;">
+						저희 서비스의 특징은 재능을 사고 팔 수 있다는 점입니다.
+						특히 다양한 재능을 강의로도 배울 수 있는 재능강의도 제공됩니다.<br><br>
+						<img src="images/dog.jpg" id=imagepreview style="width:256px; height: 256px;">
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+		 $("input[type='file']").on('change', function() {
+		  var input = $(this);
+		  var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		  $("#" + input.data("display-target")).val(label);
+		 });
+	});
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width", initial-scale="1">
+	<title>zzz</title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/codingBooster.css">
+</head>
+<body>
+
+
+<%
+	if(flag) {%>
+<table width="270" border="0" cellspacing="0" cellpadding="5">
+  <tr> 
+    <td align="center"> 
+      <p>입력하신 <%=id%> 는 사용하실 수 있는 ID입니다. </p>
+      <input type="button" value="닫기" onclick="setid()">
+    </td>
+  </tr>
+</table>
+	<%}else{%>
+		
+
+<table width="270" border="0" cellspacing="0" cellpadding="5">
+  <tr> 
+    <td height="39" align="center"><%=id%>이미 사용중인 아이디입니다.</td>
+    <script>
+    	opener.document.getElementById("hid").value="false";
+    </script>
+  </tr>
+</table>
+<form name="checkForm" action="/confirmId">
+<table width="270" border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td align="center"> 
+       다른 아이디를 선택하세요.<p>
+       <input type="text" size="10" maxlength="12" name="id"> 
+       <input type="submit" value="ID중복확인">
+    </td>
+  </tr>
+</table>
+</form>
+	<%}%>
+</body>
+<script language="javascript">
+
+  function setid()
+    {		
+    	opener.document.getElementById("userID").value="<%=id%>"; // opener는 이 창을 띄워준 페이지를 뜻한다. 
+    	opener.document.getElementById("hid").value="true";
+		self.close();
+	}
+
+</script>
+</html>

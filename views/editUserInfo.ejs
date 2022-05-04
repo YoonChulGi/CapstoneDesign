@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width", initial-scale="1">
+	<title>Talent - Bank</title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/codingBooster.css">
+</head>
+<body>
+<%include ./navbar %>
+	<style type="text/css">
+	@media (min-width: 768px) {
+		.omb_row-sm-offset-3 div:first-child[class*="col-"] {
+			margin-left: 25%;
+		}
+	}
+	<%console.dir(req.user);%>
+	/**
+	.omb_login .omb_socialButtons a {
+		color: white; // In yourUse @body-bg 
+		opacity:0.9;
+	}
+	.omb_login .omb_socialButtons a:hover {
+    	color: white;
+		opacity:1;    	
+	}
+	.omb_login .omb_socialButtons .omb_btn-facebook {
+		background-size:cover weight: 100%; background-image: url('images/facebook.png');}
+	.omb_login .omb_socialButtons .omb_btn-kakaotalk {width:250px; height: 45px; background-image: url('images/kakao.png');}
+	.omb_login .omb_socialButtons .omb_btn-naver {width:250px; height: 45px; background-image: url('images/naver.png');}
+	**/
+	
+	/**.omb_login .omb_socialButtons .omb_btn-kakaotalk {background: yellow;}
+	.omb_login .omb_socialButtons .omb_btn-naver {background: green;}
+**/
+
+		
+	.panel-login {
+		border-color: #ccc;
+		-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+		-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+		box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	}
+	.panel-login>.panel-heading {
+		color: #00415d;
+		background-color: #fff;
+		border-color: #fff;
+		text-align:center;
+	}
+	.panel-login>.panel-heading a{
+		text-decoration: none;
+		color: #666;
+		font-weight: bold;
+		font-size: 15px;
+		-webkit-transition: all 0.1s linear;
+		-moz-transition: all 0.1s linear;
+		transition: all 0.1s linear;
+	}
+	.panel-login>.panel-heading a.active{
+		color: #029f5b;
+		font-size: 18px;
+	}
+	.panel-login>.panel-heading hr{
+		margin-top: 10px;
+		margin-bottom: 0px;
+		clear: both;
+		border: 0;
+		height: 1px;
+		background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+		background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+		background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+		background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	}
+	.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+		height: 45px;
+		border: 1px solid #ddd;
+		font-size: 16px;
+		-webkit-transition: all 0.1s linear;
+		-moz-transition: all 0.1s linear;
+		transition: all 0.1s linear;
+	}
+	.panel-login input:hover,
+	.panel-login input:focus {
+		outline:none;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		border-color: #ccc;
+	}
+	.btn-login {
+		background-color: #59B2E0;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #59B2E6;
+	}
+	.btn-login:hover,
+	.btn-login:focus {
+		color: #fff;
+		background-color: #53A3CD;
+		border-color: #53A3CD;
+	}
+	
+	.btn-login2 {
+		background-color: #0D0899;  
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #0D0899;
+	}
+	.btn-login2:hover,
+	.btn-login2:focus {
+		color: #fff;
+		background-color: #0D0899;
+		border-color: #0D0899;
+	}
+
+	.btn-login3 {
+		background-color: #5CD428;  
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #5CD428;
+	}
+	.btn-login3:hover,
+	.btn-login3:focus {
+		color: #fff;
+		background-color: #5CD428;
+		border-color: #5CD428;
+	}
+
+	.btn-login4 {
+		background-color: #FFFF00;  
+		outline: none;
+		color: #000000;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #FFFF00;
+	}
+	.btn-login4:hover,
+	.btn-login4:focus {
+		color: #000000;
+		background-color: #FFFF00;
+		border-color: #FFFF00;
+	}
+
+
+	.forgot-password {
+		text-decoration: underline;
+		color: #888;
+	}
+	.forgot-password:hover,
+	.forgot-password:focus {
+		text-decoration: underline;
+		color: #666;
+	}
+
+	.btn-register {
+		background-color: #1CB94E;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #1CB94A;
+	}
+	.btn-register:hover,
+	.btn-register:focus {
+		color: #fff;
+		background-color: #1CA347;
+		border-color: #1CA347;
+	}
+
+	</style>
+	
+	
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-12">
+								<a href="#" class="active" id="login-form-link">회원 정보 수정</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								
+								<form id="register-form" action="/editUserInfoPro" method="post" role="form" onSubmit="return checkIt()">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-7"><input type="text" name="userID" id="userID" tabindex="1" class="form-control" value="<%=req.user[0].userID%>" readOnly></div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control reset" placeholder="이름" value="<%=req.user[0].username%>">
+									</div>
+									<div class="form-group">
+										<input type="datetime" name="birthday" id="birthday" tabindex="1" class="form-control reset" placeholder="생년월일" value="<%=req.user[0].birthday%>">
+										
+									</div>
+									<div class="form-group">
+										<input type="email" name="email" id="email" tabindex="1" class="form-control reset" placeholder="이메일" value="<%=req.user[0].email%>">
+									</div>
+
+									<div class="form-group"> 
+
+										<div class="row">
+											<div class="col-xs-1"></div>
+											<div class="col-xs-2"><span><h4>남자</h4></span></div>
+											<div class="col-xs-1"><input type="radio" name="sex" id="wm1"  class="form-control"  value="M"></div>
+											<div class="col-xs-3"></div>
+											<div class="col-xs-2"><span><h4>여자</h4></span></div>
+											<div class="col-xs-1"><input type="radio" name="sex" id="wm2" class="form-control"  value="F"></div>
+										</div>
+										<%if(req.user[0].sex=='M') {%>
+											<script>
+												document.getElementById('wm1').checked = true;
+												document.getElementById('wm2').checked = false;
+											</script>
+										<%}else if(req.user[0].sex=='F'){%>
+											<script>
+												document.getElementById('wm2').checked = true;
+												document.getElementById('wm1').checked = false;
+											</script>
+										<%}%>
+									</div>
+									<div class="form-group">
+										<input type="password" name="pw" id="pw" tabindex="2" class="form-control reset" placeholder="비밀번호">
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="수정 완료">
+												<script>
+												function checkIt() {
+											        
+											        
+											        if(!document.getElementById("pw").value) {
+											            alert("비밀번호를 입력하세요");
+											            return false;
+											        }
+											        								       
+											        if(document.getElementById("username").value=="") {
+											            alert("사용자 이름을 입력하세요");
+											            return false;
+											        }
+											        if(document.getElementById("birthday").value=="") {
+											            alert("생년월일을 입력하세요");
+											            return false;
+											        }
+											        if(document.getElementById("email").value=="") {
+											            alert("이메일을 입력하세요");
+											            return false;
+											        }
+											        
+											        
+											        
+											    }
+												</script>
+												
+												
+												
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<footer style="background-color: #000000; color: #ffffff">
+	<div class="container">
+		<br>
+			<div class="row">
+				<div class="col-sm-2"></div>		
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4"></div>			
+				<div class="col-sm-2" style="text-align: center;">
+					<% let d = new Date(); %>
+					<h5>Copyright &copy; <%=d.getFullYear()%></h5><h5>201301277 윤철기</h5><br/><br/>
+				</div>
+			</div>
+		</div> 
+	</footer>
+	<div class="row">
+		<div class="modal" id="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						코딩 부스터의 특징
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body" style="text-align: center;">
+						저희 서비스의 특징은 재능을 사고 팔 수 있다는 점입니다.
+						특히 다양한 재능을 강의로도 배울 수 있는 재능강의도 제공됩니다.<br><br>
+						<img src="images/dog.jpg" id=imagepreview style="width:256px; height: 256px;">
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script type="text/javascript">
+	
+	
+	$(function() {
+	
+   
+
+});
+
+	</script>
+	
+</body>
+</html>

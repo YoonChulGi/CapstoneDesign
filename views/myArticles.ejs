@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Talent - Bank</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+	<style>
+		.itembox{
+			height:700px;
+		}
+	</style>
+  </head>
+
+  <body>
+
+  
+  <%for(let i=0;i<result.length;i++){
+  	console.log(i);
+  	console.dir(result[i]._doc);
+  }%>	
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+		
+        <div class="col-lg-3">
+        	<h1 class="my-4">내가 등록한 재능</h1>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+          
+          <div class="row">
+            <%for(let i=0;i<result.length;i++) {%>
+            <div class="col-lg-4 col-md-6 mb-4 itembox">
+              <div class="card h-100">
+                <a href="/item?id=<%=result[i]._doc._id%>"><img class="card-img-top" src="/<%=result[i]._doc.picture%>" alt=""></a>
+                <div class="card-body" style="height:100px;">
+                  <h4 class="card-title">
+                    <a href="/item?id=<%=result[i]._doc._id%>"><%=result[i]._doc.title%></a>
+                  </h4>
+                  <h5><%=result[i]._doc.price%>원</h5>
+                  <%
+                  	let discribe = result[i]._doc.discribe;
+                  		if(discribe.length > 30) {
+                  			discribe = discribe.substr(0,30) + "...";
+                  		}
+                  %>
+                  <p class="card-text"><%=discribe%></p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+              </div>
+            </div>
+            <%}%>
+            
+          </div>
+          <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+	<div style="height:100px;">
+	
+	</div>
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy;<%=new Date().getFullYear();%> 윤철기 201301277 </p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+  </body>
+
+</html>

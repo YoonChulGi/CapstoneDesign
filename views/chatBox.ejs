@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Talent - Bank 1:1 문의</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+	.message-candidate {
+  background: rgba(223, 229, 121, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin-bottom: 10px;
+}
+
+.message-hiring-manager {
+  background: rgba(0, 167, 204, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin-bottom: 10px;
+}
+
+.messaging {
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.message-text {
+  margin-top: 10px;
+}
+
+.message-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  display: inline-block;
+}
+
+.message-name {
+  margin-left: 10px;
+  display: inline-block;
+}
+	</style>
+  </head>
+  <script src="vendor/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<%let myID = req.user.userID || req.user[0].userID; let yourID = author_id;%>
+<%console.log('prop: '+prop);%>
+<script>
+	var host = window.location.hostname;
+	var port = window.location.port;
+	var socket;
+	
+	$(function(){
+		
+		connectToServer();
+		
+		var id = "<%=myID%>#<%=article_id%>#<%=author_id%>";
+		
+		var output = {id:id};
+		console.log('서버로 보낼 데이터' + JSON.stringify(output));
+		
+		if(socket!=undefined) {
+			socket.emit('login',output);
+		}
+		
+		$("#sendButton").bind('click',function(event){
+			console.log('sendButton clicked!');
+			var sender = "<%=myID%>#<%=article_id%>#<%=author_id%>";
+			var recepient = "<%=author_id%>#<%=article_id%>#<%=myID%>";
+			var data = $('#dataInput').val();
+			
+			var output = {sender:sender, recepient:recepient, command:'chat', type:'text', data:data};
+			console.log('서버로 보낼 데이터' + JSON.stringify(output));
+			if(socket == undefined) {
+				alert('서버에 연결되어 있지 않습니다.');
+				return;
+			}
+			socket.emit('message',output);
+			$('#dataInput').val('');
+		});
+	});
+	//서버에 연결하는 함수 정의 
+	function connectToServer(){
+		console.log('connectToServer() called!');
+		var options = {'forceNew':true};
+		var url = 'http://' + host + ':'+ port;
+		socket = io.connect(url,options);
+		
+		socket.on('connect',function(){
+			console.log('웹 소켓 서버에 연결되었습니다. ' + url);
+			
+			socket.on('message',function(message){
+				console.log('브라우저에서 메시지를 받았습니다.');
+				console.log(JSON.stringify(message));
+				console.log("<%=author_id%>#<%=article_id%>#<%=myID%>");
+				if(message.sender == "<%=author_id%>#<%=article_id%>#<%=myID%>"){ // 상대가 보낸거
+					console.log('상대가 보낸거');
+					println('<div class="message-candidate center-block">' 
+						    +'<div class="row">' 
+						    +  '<div class="col-xs-8 col-md-6">'
+						    +    '<img src="http://imgc.allpostersimages.com/images/P-473-488-90/68/6896/2GOJ100Z/posters/despicable-me-2-minions-movie-poster.jpg" class="message-photo">'
+						    +  '<h4 class="message-name"><%=author_id%></h4>'
+						    +'</div>'
+						    +'<div class="col-xs-4 col-md-6 text-right message-date"><%=new Date()%></div>'
+						    +'</div>'
+						    +'<div class="row message-text">'+message.data+'</div>'
+						  	+'</div>');
+				}else if(message.sender == "<%=myID%>#<%=article_id%>#<%=author_id%>"){ // 내가 보낸거
+					console.log('내가 보낸거');
+					println('<div class="message-hiring-manager center-block">' 
+						    +'<div class="row">' 
+						    +  '<div class="col-xs-8 col-md-6">'
+						    +    '<img src="http://imgc.allpostersimages.com/images/P-473-488-90/68/6896/2GOJ100Z/posters/despicable-me-2-minions-movie-poster.jpg" class="message-photo">'
+						    +  '<h4 class="message-name"><%=myID%></h4>'
+						    +'</div>'
+						    +'<div class="col-xs-4 col-md-6 text-right message-date"><%=new Date()%></div>'
+						    +'</div>'
+						    +'<div class="row message-text">'+message.data+'</div>'
+						  	+'</div>');
+				}
+			});
+		});
+	}
+
+	function println(data){
+		console.log(data);
+		$('#container').append('<p>'+data+'</p>');
+	}
+
+
+
+
+
+	
+</script>
+
+<h2 class="text-center">1:1 문의하기</h2>
+<div class="container" id="container">
+</div>
+<div class="container">
+  <div class="messaging center-block">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="input-group">
+          <input type="text" class="form-control" id="dataInput" />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="sendButton">전송</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

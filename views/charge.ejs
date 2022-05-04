@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width", initial-scale="1">
+	<title>코딩부스터</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/codingBooster.css">
+</head>
+
+<body>
+<% include ./navbar%>
+	<style type="text/css">
+	.container {
+		border-color: #000000;
+		border-style: solid;
+	}
+
+	.btn-main {
+		background-color: #000000;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #000000;
+	}
+	.btn-main:hover,
+	.btn-main:focus {
+		color: #fff;
+		background-color: #000000;
+		border-color: #000000;
+	}
+	
+	.hello { size: 
+		     height: auto; 
+			 font-size: 30px;  }
+
+	</style>
+	
+	
+	
+	
+	<div class="container" style="text-align: center;">
+		<hr>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="form-group" >
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3"><h2>충전하실 금액을 입력해주세요</h2></div>
+			</div>
+			<div class="row">
+				<form method="post" action="/chargePro">
+					<div class="col-sm-6 col-sm-offset-3"><input type="number" min="5000" max="1000000" onkeydown="javascript: return event.keyCode == 69 ? false : true" name="money" /></div>
+		<br>
+		<br>
+		<br>
+					<div class="col-sm-6 col-sm-offset-3">
+					<input type="submit" name="" tabindex="4" class="form-control btn btn-main" value="충전하기">
+				</form>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<hr>
+	</div>
+		<br/>
+
+<footer style="background-color: #000000; color: #ffffff">
+
+	<div class="container">
+		<br>
+			<div class="row">
+				<div class="col-sm-2"></div>		
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4"></div>			
+				<div class="col-sm-2" style="text-align: center;">
+					<% let d = new Date(); %>
+					<h5>Copyright &copy; <%=d.getFullYear()%></h5><h5>201301277 윤철기</h5><br/><br/>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	
+</body>
+</html>

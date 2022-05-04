@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Talent - Bank</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+  </head>
+<style>
+.imgbtn {
+	height:300px;
+	width:200px;
+}
+.pointer{
+	cursor:pointer;
+}
+
+</style>
+  <body>
+
+    
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4"><strong>판매자 정보</strong>&nbsp;</h1>
+      
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+        	<%
+        		let profileImg = '';
+        		if(authorInfo._doc.provider == "kakao") {
+					profileImg = authorInfo.kakao.properties.profile_image;
+        		} else {
+        			profileImg = '/profileImage/'+authorInfo._doc.profimg;
+        		}
+        		
+        	%>
+          <img class="img-fluid" src="<%=profileImg%>" alt="http://placehold.it/750x500" width=400 style="height:500px;">
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">기본 정보</h3>
+          <%if(authorInfo._doc.provider=="kakao"){%>
+          	<p>ID: (카카오)<%=authorInfo._doc.kakao.kaccount_email%></p>		
+          <%}else if(authorInfo._doc.provider=="facebook"){%>
+          	<p>ID: (페이스북)<%=authorInfo._doc.facebook.email%></p>
+          <%}else{%>
+          	<p>ID: <%=authorInfo._doc.userID%></p>
+          <%}%>
+            <p>이메일: <%=authorInfo._doc.email%></p>
+            <p>총 판매 수: <%=0%></p>
+          <h3 class="my-3">보유한 재능</h3>
+          <ul>
+          	<%
+          		let tal_arr = authorInfo._doc.talent.split('#');
+          		for(let i=0;i<tal_arr.length;i++){%>
+          			<li><%=tal_arr[i]%></li>
+          	<%}%>
+          </ul>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+      <!-- Related Projects Row -->
+      <h3 class="my-4">판매중인 재능</h3>
+		
+      <div class="row">
+		<%for(let i=0;i<articles.length;i++){%>
+			<div class="col-md-3 col-sm-6 mb-4">
+            	<img class="img-fluid imgbtn pointer" src="<%=articles[i]._doc.picture%>" alt="" onclick="goToItem<%=i%>()"><br />
+            	<span class="pointer" onclick="goToItem<%=i%>()"><strong><%=articles[i]._doc.title%></strong></span>
+        	</div>
+        	<script>
+        		function goToItem<%=i%>(){
+        			window.location.href="/item?id=<%=articles[i]._doc._id%>";
+        		}
+        	</script>	
+		<%}%>
+      </div>
+      <!-- /.row -->
+      
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
